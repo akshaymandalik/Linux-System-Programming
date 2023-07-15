@@ -12,24 +12,29 @@ int main(int args, char *argv[]){
 
     int isExists = -1;
     int isReadable = -1;
-    char buffer[100];
+    char *buffer = NULL;
+    int size = 0;
     int fd = 0;
+    int ret = 0;
     if(args!=3){
         printf("Error: Invalid Arguments!!\n");
         printf("Usage:Name_of_Executable[space]Name_of_file[space]No_of_bytes_to_read");
         return -1;
     }
 
-    buffer = (char *)malloc(atoi(argv[2]));
+    size = atoi(argv[2]);
+    if(size<=0){
+        printf("Error: Can't read 0 or less than 0 bytes");
+        return -1;
+    }
+
+    buffer = (char *)malloc(size);
     if(buffer == NULL){
         printf("Error: Unable to read\n");
         return -1;
     }
 
-    if(argv[2]<=0){
-        printf("Error: Can't read 0 or less than 0 bytes");
-        return -1;
-    }
+    
 
     isExists = access(argv[1],F_OK);
 
@@ -39,27 +44,38 @@ int main(int args, char *argv[]){
         isReadable = access(argv[1],R_OK);
         if(isReadable == 0){
 
-                fd = open( argv[1],O_RDONLY);
+                fd = open(argv[1],O_RDONLY);
                 if(fd == -1){
                     printf("Error: Unable to open File\n");
+                    free(buffer);
                     return -1;
                 }
                 printf("Reading....\n");
-                read(fd,buffer,sizeof(buffer));
+                ret = read(fd,buffer,size);
+                if(ret == -1){
+                    printf("Error:Unable to read file.\n");
+                    free(buffer);
+                    close(fd);
+                    return -1;
+                }
+                close(fd);
         }
         else if(errno == EACCES){
             printf("File is not Readable\n");
+            free(buffer);
             return -1;
         }
 
     }
     else if(errno == ENOENT){
         printf("File Does not exists\n");
+        free(buffer);
         return -1;
     }
 
-    printf("Data:\n");
-    printf("%s",buffer);
+    write(1,buffer,ret);
 
+    
+    free(buffer);
     return 0;
 }
