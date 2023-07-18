@@ -3,7 +3,7 @@ Problem Statement: Write a program which accept directory name
                    from user and print all file names and its 
                    types from that directory.
 Author Name:Akshay Mandalik
-Last Modified:Sunday,16July,7: AM
+Last Modified:Sunday,16July,3:08 PM
 */
 #include<stdio.h>
 #include<fcntl.h>
