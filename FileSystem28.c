@@ -10,8 +10,6 @@ Last Modified: Sat 15 July 10:02 AM
 #include<dirent.h>
 #include<sys/stat.h>
 
-
-
 int main(int args, char *argv[]){
 
     char dirName[20] = {"\0"};
