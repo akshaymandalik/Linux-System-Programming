@@ -11,7 +11,6 @@ Problem Statement:
 int main(int args, char *argv[]){
 
     DIR *source = NULL;
-    DIR *source = NULL;
     struct dirent *entry = NULL;
     char oldfile[50]={"\0"};
     char newfile[50]={"\0"}; 
