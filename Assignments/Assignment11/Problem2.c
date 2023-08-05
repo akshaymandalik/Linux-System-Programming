@@ -58,12 +58,11 @@ int main(){
 
         iRet = pthread_create(TID+iCnt,NULL,*(functionName+iCnt),NULL);
         if(iRet != 0){
-            printf("Error: Can't run thread1");
+            printf("Error: Can't run %s",*(functionName)+iCnt);
         }
         pthread_join(*(TID+iCnt),NULL);
     }
     
-
 
     return 0;
 
