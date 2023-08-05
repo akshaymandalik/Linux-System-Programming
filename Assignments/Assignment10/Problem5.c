@@ -2,9 +2,8 @@
 #include<pthread.h>
 #include<unistd.h>
 #include<stdlib.h>
-  
-void * thisThread(void *ptr){
 
+void * thisThread(void *ptr){
     
     printf("Id of current thread:%ld\n",(long)pthread_self());
     pthread_exit(NULL); 
