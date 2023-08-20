@@ -56,5 +56,6 @@ int main()
 		return -1;
 	}
 	printf("data written successfully\n");
+	close(fd);
 	return 0;
 }
